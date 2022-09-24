@@ -2,7 +2,7 @@
 
 public interface IClientBehaviour : IMessagingBehaviour
 {
-    Task ConnectAsync(CancellationToken? cancellationToken = null);
+    Task ConnectAsync(CancellationToken cancellationToken = default);
     
-    Task DisconnectAsync(CancellationToken? cancellationToken = null);
+    Task DisconnectAsync(CancellationToken cancellationToken = default);
 }

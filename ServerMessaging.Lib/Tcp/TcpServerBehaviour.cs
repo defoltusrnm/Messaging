@@ -1,18 +1,20 @@
 ﻿using ServerMessaging.Lib.Infrastructure.Interfaces;
 using ServerMessaging.Lib.Infrastructure.Primirives;
-using System.Net;
 using System.Net.Sockets;
+using System.Net;
 
-namespace ServerMessaging.Samples;
+namespace ServerMessaging.Lib.Tcp;
 
 public class TcpServerBehaviour : IServerBehaviour
 {
     private readonly TcpListener _listener;
     private readonly IDictionary<SubscriberInfo, Task> _runningTask = new Dictionary<SubscriberInfo, Task>();
+    private readonly ISubscriberHandler _subscriberHandler;
 
-    public TcpServerBehaviour(IPEndPoint endPoint)
+    public TcpServerBehaviour(IPEndPoint endPoint, ISubscriberHandler subscriberHandler)
     {
         _listener = new TcpListener(endPoint);
+        _subscriberHandler = subscriberHandler;
     }
 
     public IDictionary<SubscriberInfo, IClientBehaviour> Subscribers => new Dictionary<SubscriberInfo, IClientBehaviour>();
@@ -23,56 +25,50 @@ public class TcpServerBehaviour : IServerBehaviour
         GC.SuppressFinalize(this);
     }
 
-    public Task RunAsync(CancellationToken? cancellationToken = null)
+    public Task RunAsync(CancellationToken cancellationToken = default)
     {
         _listener.Start();
         return Task.Run(() => ProccessRequests(cancellationToken));
     }
 
-    public async Task StopAsync(CancellationToken? cancellationToken = null)
+    public async Task StopAsync(CancellationToken cancellationToken = default)
     {
         await Task.WhenAll(_runningTask.Values);
         _runningTask.Clear();
         _listener.Stop();
     }
 
-    protected async Task ProccessRequests(CancellationToken? cancellationToken = null)
+    protected async Task ProccessRequests(CancellationToken cancellationToken = default)
     {
         while (true)
         {
-            if (cancellationToken.HasValue && cancellationToken.Value.IsCancellationRequested)
+            if (cancellationToken.IsCancellationRequested)
             {
                 return;
             }
 
             TcpClient client = await _listener.AcceptTcpClientAsync();
+            EndPoint endpoint = client.Client.RemoteEndPoint ?? throw new Exception("dwada");
+
             SubscriberInfo info = new()
             {
-                Address = "GetLater",
+                Address = endpoint.ToString(),
                 Port = 500
             };
             IClientBehaviour behaviour = new TcpClientBehaviour(client);
-            ISubscriberHandler subscriberHandler = new SimpleTcpHandler(behaviour, info);
 
             var stream = client.GetStream();
             byte[] readBytes = new byte[256];
-            
-            if (cancellationToken == null)
-            {
-                await stream.ReadAsync(readBytes, 0, readBytes.Length);
-            }
-            else
-            {
-                await stream.ReadAsync(readBytes, 0, readBytes.Length, cancellationToken.Value);
-            }
-            
+
+            await stream.ReadAsync(readBytes, 0, readBytes.Length, cancellationToken);
+
             var message = new ByteMessage
             {
                 Data = readBytes.Where(b => b != '\0').ToArray()
             };
-            
+
             Subscribers.Add(info, behaviour);
-            _runningTask.Add(info, subscriberHandler.HandleAsync(message, cancellationToken));
+            _runningTask.Add(info, _subscriberHandler.HandleAsync(message, cancellationToken));
         }
     }
 }

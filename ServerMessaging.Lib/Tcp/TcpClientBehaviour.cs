@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace ServerMessaging.Samples;
+namespace ServerMessaging.Lib.Tcp;
 
 public class TcpClientBehaviour : IClientBehaviour
 {
@@ -21,19 +21,14 @@ public class TcpClientBehaviour : IClientBehaviour
         _endPoint = (IPEndPoint)client.Client.RemoteEndPoint!;
     }
 
-    public Task ConnectAsync(CancellationToken? cancellationToken = null)
+    public Task ConnectAsync(CancellationToken cancellationToken = default)
     {
         return _client.ConnectAsync(_endPoint);
     }
 
-    public Task DisconnectAsync(CancellationToken? cancellationToken = null)
+    public Task DisconnectAsync(CancellationToken cancellationToken = default)
     {
-        if (cancellationToken == null)
-        {
-            return _client.Client.DisconnectAsync(false).AsTask();
-        }
-
-        return _client.Client.DisconnectAsync(false, cancellationToken.Value).AsTask();
+        return _client.Client.DisconnectAsync(false, cancellationToken).AsTask();
     }
 
     public void Dispose()
@@ -42,15 +37,10 @@ public class TcpClientBehaviour : IClientBehaviour
         GC.SuppressFinalize(this);
     }
 
-    public Task SendAsync<TData>(IMessage<TData> message, CancellationToken? cancellationToken = null) where TData : class
+    public Task SendAsync<TData>(IMessage<TData> message, CancellationToken cancellationToken = default) where TData : class
     {
         ArraySegment<byte> bytes = new(message.AsBytes().Data.ToArray());
 
-        if (cancellationToken == null)
-        {
-            return _client.Client.SendAsync(bytes, SocketFlags.None);
-        }
-        
-        return _client.Client.SendAsync(bytes, SocketFlags.None, cancellationToken.Value).AsTask();
+        return _client.Client.SendAsync(bytes, SocketFlags.None, cancellationToken).AsTask();
     }
 }
