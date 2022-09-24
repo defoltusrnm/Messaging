@@ -1,8 +1,8 @@
 ﻿namespace ServerMessaging.Lib.Infrastructure.Interfaces;
 
-public interface IServerBehaviour : IMessagingBehaviour
+public interface IServerBehaviour
 {
-    HashSet<SubscriberInfo> Subscribers { get; }
+    IDictionary<SubscriberInfo, IClientBehaviour> Subscribers { get; }
     
     Task RunAsync(CancellationToken? cancellationToken = null);
 
