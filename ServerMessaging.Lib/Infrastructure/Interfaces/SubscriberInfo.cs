@@ -21,7 +21,7 @@ public struct SubscriberInfo
         hashCode.Add(Address);
         hashCode.Add(Port);
 
-        return hashCode.GetHashCode();
+        return hashCode.ToHashCode();
     }
 
     public override bool Equals([NotNullWhen(true)] object? obj)

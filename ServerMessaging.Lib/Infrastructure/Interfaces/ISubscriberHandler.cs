@@ -4,5 +4,6 @@ public interface ISubscriberHandler
 {
     SubscriberInfo SubscriberInfo { get; }
 
-    Task HandleAsync(CancellationToken? cancellationToken = null);
+    Task HandleAsync<TData>(IMessage<TData> message, CancellationToken? cancellationToken = null)
+        where TData : class;
 }

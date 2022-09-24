@@ -1,6 +1,6 @@
 ﻿namespace ServerMessaging.Lib.Infrastructure.Interfaces;
 
-public interface IServerBehaviour
+public interface IServerBehaviour : IDisposable
 {
     IDictionary<SubscriberInfo, IClientBehaviour> Subscribers { get; }
     
