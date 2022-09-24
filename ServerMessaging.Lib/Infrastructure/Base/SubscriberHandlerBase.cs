@@ -14,5 +14,7 @@ public abstract class SubscriberHandlerBase : ISubscriberHandler
 
     public SubscriberInfo SubscriberInfo { get; }
 
-    public abstract Task HandleAsync<TData>(IMessage<TData> message, CancellationToken? cancellationToken = null) where TData : class;
+    public abstract Task HandleAsync<TData>(IMessage<TData> message, CancellationToken cancellationToken = default) where TData : class;
+
+    public abstract Task RespondAsync<TData>(IMessage<TData> message, CancellationToken cancellationToken = default) where TData : class;
 }

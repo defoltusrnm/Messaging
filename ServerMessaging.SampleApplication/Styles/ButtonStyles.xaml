@@ -1,0 +1,132 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="CloseTab"
+           TargetType="{x:Type Button}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Padding="10"
+                            CornerRadius="15">
+                        <Border.Background>
+                            <SolidColorBrush x:Name="BorderColor" Color="#227447" />
+                        </Border.Background>
+                        <Border.BorderBrush>
+                            <SolidColorBrush x:Name="BorderBrushColor" Color="#227447" />
+                        </Border.BorderBrush>
+                        <ContentPresenter/>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="BorderColor"
+                                                        Storyboard.TargetProperty="Color"
+                                                        To="#4E9668"
+                                                        Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="BorderColor"
+                                                        Storyboard.TargetProperty="Color"
+                                                        To="#0E5C2F"
+                                                        Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="BorderColor"
+                                                        Storyboard.TargetProperty="Color"
+                                                        To="#7cbf8f"
+                                                        Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState Name="Normal"/>
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Disabled" 
+                                                      To="Normal"
+                                                      GeneratedDuration="0:0:0.1">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Color"
+                                                                          Storyboard.TargetName="BorderColor"
+                                                                          FillBehavior="HoldEnd" >
+
+                                                <ColorAnimationUsingKeyFrames.KeyFrames>
+
+                                                    <LinearColorKeyFrame Value="#7cbf8f" 
+                                                                         KeyTime="0:0:0.03" />
+                                                    <LinearColorKeyFrame Value="#227447" 
+                                                                         KeyTime="0:0:0.1" />
+
+                                                </ColorAnimationUsingKeyFrames.KeyFrames>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="Pressed" 
+                                                      To="Disabled"
+                                                      GeneratedDuration="0:0:0.1">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Color"
+                                                                          Storyboard.TargetName="BorderColor"
+                                                                          FillBehavior="HoldEnd" >
+
+                                                <ColorAnimationUsingKeyFrames.KeyFrames>
+
+                                                    <LinearColorKeyFrame Value="#0E5C2F" 
+                                                                         KeyTime="0:0:0.03" />
+                                                    <LinearColorKeyFrame Value="#7cbf8f" 
+                                                                         KeyTime="0:0:0.1" />
+
+                                                </ColorAnimationUsingKeyFrames.KeyFrames>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="Normal" 
+                                                      To="MouseOver" 
+                                                      GeneratedDuration="0:0:0.1">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Color"
+                                                                          Storyboard.TargetName="BorderColor"
+                                                                          FillBehavior="HoldEnd" >
+
+                                                <ColorAnimationUsingKeyFrames.KeyFrames>
+
+                                                    <LinearColorKeyFrame Value="#227447" 
+                                                                         KeyTime="0:0:0.03" />
+                                                    <LinearColorKeyFrame Value="#4E9668" 
+                                                                         KeyTime="0:0:0.1" />
+
+                                                </ColorAnimationUsingKeyFrames.KeyFrames>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="MouseOver" 
+                                                      To="Normal" 
+                                                      GeneratedDuration="0:0:0.1">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Color"
+                                                                          Storyboard.TargetName="BorderColor"
+                                                                          FillBehavior="HoldEnd" >
+
+                                                <ColorAnimationUsingKeyFrames.KeyFrames>
+
+                                                    <LinearColorKeyFrame Value="#4E9668" 
+                                                                         KeyTime="0:0:0.03" />
+                                                    <LinearColorKeyFrame Value="#227447" 
+                                                                         KeyTime="0:0:0.1" />
+
+                                                </ColorAnimationUsingKeyFrames.KeyFrames>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

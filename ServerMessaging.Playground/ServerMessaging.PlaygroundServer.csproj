@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ServerMessaging.Lib\ServerMessaging.Lib.csproj" />
-    <ProjectReference Include="..\ServerMessaging.Samples\ServerMessaging.Samples.csproj" />
   </ItemGroup>
 
 </Project>
