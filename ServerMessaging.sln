@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32721.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerMessaging.Lib", "ServerMessaging.Lib\ServerMessaging.Lib.csproj", "{2E11ABAD-3378-4F9C-A334-0F4CDC307E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerMessaging.Playground", "ServerMessaging.Playground\ServerMessaging.Playground.csproj", "{67FA4AEE-4DC7-4960-8107-129D44186FC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerMessaging.PlaygroundServer", "ServerMessaging.Playground\ServerMessaging.PlaygroundServer.csproj", "{67FA4AEE-4DC7-4960-8107-129D44186FC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
