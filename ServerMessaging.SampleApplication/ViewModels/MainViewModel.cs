@@ -7,13 +7,17 @@ public class MainViewModel : ViewModelBase
 {
     public MainViewModel()
     {
-        Terminals.Add(new TerminalViewModel()
+        Terminals.Add(new PageViewModel()
         {
-            Title = "Test",
-            Text = "Test",
+            Title = "New Page",
+            TerminalViewModel = new TerminalViewModel()
+            {
+                Text = "dwadawdawda",
+                Promt = ">"
+            }
         });
     }
     
-    private ObservableCollection<TerminalViewModel> _terminals = new();
-    public ObservableCollection<TerminalViewModel> Terminals => _terminals;
+    private ObservableCollection<PageViewModel> _terminals = new();
+    public ObservableCollection<PageViewModel> Terminals => _terminals;
 }

@@ -14,4 +14,6 @@ public class Locator
 	}
 
 	public MainViewModel? MainViewModel => _serviceProvider.GetService<MainViewModel>();
+
+	public TerminalViewModel? TerminalViewModel => _serviceProvider.GetService<TerminalViewModel>();
 }
