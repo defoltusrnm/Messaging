@@ -2,10 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:locators="clr-namespace:ServerMessaging.SampleApplication.Infrastructure.Locators"
+             xmlns:converters="clr-namespace:ServerMessaging.SampleApplication.Views.Converters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <locators:Locator x:Key="Locator"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/TerminalStyles.xaml"/>
                 <ResourceDictionary Source="Styles/ButtonStyles.xaml"/>

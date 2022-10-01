@@ -3,41 +3,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels="clr-namespace:ServerMessaging.SampleApplication.ViewModels"
-        xmlns:controls="clr-namespace:ServerMessaging.SampleApplication.Views.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}">
     <Grid>
-        <TabControl ItemsSource="{Binding Terminals}">
-            <TabControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewModels:TerminalViewModel}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Title}"
-                                   Margin="3"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
-                        <Button Content="x"
-                                Margin="3"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Style="{StaticResource CloseTab}"/>
-                        <Button Content="+"
-                                Margin="3"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Style="{StaticResource CloseTab}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <controls:ConnectionSetting Visibility="Collapsed"/>
-                        <controls:Terminal DataContext="{Binding TerminalViewModel, UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
+        
     </Grid>
 </Window>
