@@ -1,0 +1,9 @@
+﻿<Application x:Class="ServerMessaging.Terminal.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ServerMessaging.Terminal"
+             StartupUri="Views/Windows/TerminalHost.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
