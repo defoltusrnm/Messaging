@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerMessaging.PlaygroundS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerMessaging.PlaygroundClient", "ServerMessaging.PlaygroundClient\ServerMessaging.PlaygroundClient.csproj", "{A1D3E29D-230C-4A30-9167-A79B24A56D66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerMessaging.SampleApplication", "ServerMessaging.SampleApplication\ServerMessaging.SampleApplication.csproj", "{021CB98E-5F7B-4484-8D03-23218569669D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerMessaging.Terminal.Infrastructure", "ServerMessaging.Terminal.Infrastructure\ServerMessaging.Terminal.Infrastructure.csproj", "{3DA7BB12-057E-4134-B283-6F3E3601F242}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{A1D3E29D-230C-4A30-9167-A79B24A56D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1D3E29D-230C-4A30-9167-A79B24A56D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1D3E29D-230C-4A30-9167-A79B24A56D66}.Release|Any CPU.Build.0 = Release|Any CPU
-		{021CB98E-5F7B-4484-8D03-23218569669D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{021CB98E-5F7B-4484-8D03-23218569669D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{021CB98E-5F7B-4484-8D03-23218569669D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{021CB98E-5F7B-4484-8D03-23218569669D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA7BB12-057E-4134-B283-6F3E3601F242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA7BB12-057E-4134-B283-6F3E3601F242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA7BB12-057E-4134-B283-6F3E3601F242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA7BB12-057E-4134-B283-6F3E3601F242}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
