@@ -1,4 +1,5 @@
 ﻿using Messaging.Console.Handlers;
+using Messaging.Console.Interceptors;
 using Messaging.Console.Messages;
 using Messaging.Console.Services;
 using Messaging.Domain.Handlers.Primitives;
@@ -23,6 +24,7 @@ public class Program
 
         buidler.AddMessageFactory<ConsoleMessageFactory>()
                .AddCommand<ConsoleHandler>(new TcpCommand("log").Path)
+               .AddInterceptor<ConsoleInterceptor>()
                .UseHandlerMediator<HandlersMediator>()
                .UsePackageProcessor<PackageProcessor>();
 
