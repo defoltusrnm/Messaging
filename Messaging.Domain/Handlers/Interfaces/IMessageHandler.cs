@@ -1,9 +1,11 @@
-﻿using Messaging.Domain.Messages.Interfaces;
+﻿using Messaging.Domain.Contextes.Interfaces;
+using Messaging.Domain.Messages.Interfaces;
 
 namespace Messaging.Domain.Handlers.Interfaces;
 
 public interface IMessageHandler
 {
+    ISessionContext? Context { get; set; }
     Task HandleAsync(IMessage message, CancellationToken cancellationToken = default);
 }
 

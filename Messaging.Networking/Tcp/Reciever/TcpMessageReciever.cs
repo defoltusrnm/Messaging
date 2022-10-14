@@ -1,7 +1,9 @@
-﻿using Messaging.Domain.Handlers.Interfaces;
+﻿using Messaging.Domain.Contextes.Interfaces;
+using Messaging.Domain.Handlers.Interfaces;
 using Messaging.Domain.Interceptors.Interfaces;
 using Messaging.Domain.Packages.Interface;
 using Messaging.Networking.Base;
+using Messaging.Networking.Tcp.Contextes;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -50,13 +52,15 @@ public class TcpMessageReciever : NetworkRecieverBase
                         continue;
                     }
 
-                    bool isHandled = await InterceptPackage(package, cancellationToken);
+                    var context = new NetworkContext(raw, package, Encoding, stream);
+
+                    bool isHandled = await InterceptPackage(context, cancellationToken);
                     if (isHandled)
                     {
                         continue;
                     }
 
-                    await HandlersMediator.SendAsync(package, cancellationToken);
+                    await HandlersMediator.SendAsync(context, cancellationToken);
                 }
             }
         }
@@ -87,11 +91,11 @@ public class TcpMessageReciever : NetworkRecieverBase
             ?? throw new InvalidOperationException("Invalid bytes");
     }
 
-    private async Task<bool> InterceptPackage(IPackage package, CancellationToken cancellationToken = default)
+    private async Task<bool> InterceptPackage(ISessionContext context, CancellationToken cancellationToken = default)
     {
         foreach (var interceptor in PackageInterceptors ?? Enumerable.Empty<IPackageInterceptor>())
         {
-            bool isHandled = await interceptor.InterceptAsync(package, cancellationToken);
+            bool isHandled = await interceptor.InterceptAsync(context, cancellationToken);
 
             if (isHandled)
             {

@@ -1,6 +1,5 @@
-﻿using Messaging.Domain.Commands.Interfaces;
+﻿using Messaging.Domain.Contextes.Interfaces;
 using Messaging.Domain.Handlers.Interfaces;
-using Messaging.Domain.Packages.Interface;
 
 namespace Messaging.Domain.Handlers.Primitives;
 
@@ -15,20 +14,21 @@ public class HandlersMediator : IHandlersMediator
         _handlerTopologies = handlersTopology;
     }
 
-    public async Task SendAsync(IPackage package, CancellationToken cancellationToken = default)
+    public async Task SendAsync(ISessionContext context, CancellationToken cancellationToken = default)
     {
-        if (!_handlerTopologies.ContainsKey(package.Command.Path))
+        if (!_handlerTopologies.ContainsKey(context.PreparedPackage.Command.Path))
         {
             throw new InvalidOperationException("No message handler for such command");
         }
         
-        var handlerType = _handlerTopologies[package.Command.Path];
+        var handlerType = _handlerTopologies[context.PreparedPackage.Command.Path];
 
         if (_serviceProvider.GetService(handlerType) is not IMessageHandler handler)
         {
             throw new InvalidOperationException("DI exception");
         }
 
-        await handler.HandleAsync(package.Message, cancellationToken);
+        handler.Context = context;
+        await handler.HandleAsync(context.PreparedPackage.Message, cancellationToken);
     }
 }

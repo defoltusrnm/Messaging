@@ -1,8 +1,8 @@
-﻿using Messaging.Domain.Packages.Interface;
+﻿using Messaging.Domain.Contextes.Interfaces;
 
 namespace Messaging.Domain.Handlers.Interfaces;
 
 public interface IHandlersMediator
 {
-    Task SendAsync(IPackage package, CancellationToken cancellationToken = default);
+    Task SendAsync(ISessionContext context, CancellationToken cancellationToken = default);
 }
