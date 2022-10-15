@@ -9,7 +9,7 @@ namespace Messaging.Console.Interceptors
         {
             System.Console.WriteLine($"client {context.ClientEndPoint} raw text {context.RawText}");
 
-            return Task.FromResult(false);
+            return Task.FromResult(true);
         }
     }
 }

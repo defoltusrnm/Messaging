@@ -18,12 +18,11 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
-        var services = new ServiceCollection();
-        services.AddScoped<ConsoleService>();
-        var buidler = new TcpRecieverBuilder(services, IPEndPoint.Parse("127.0.0.1:5000"));
+        var buidler = new TcpRecieverBuilder(IPEndPoint.Parse("127.0.0.1:5000"));
+        buidler.Services.AddScoped<ConsoleService>();
 
         buidler.AddMessageFactory<ConsoleMessageFactory>()
-               .AddCommand<ConsoleHandler>(new TcpCommand("log").Path)
+               .AddCommand<ConsoleHandler>("log")
                .AddInterceptor<ConsoleInterceptor>()
                .UseHandlerMediator<HandlersMediator>()
                .UsePackageProcessor<PackageProcessor>();
@@ -35,7 +34,7 @@ public class Program
         var t2 = Task.Run(() => RunSender(sender, "Hello from sender 1", 500));
 
         var sender2 = new TcpSender(IPEndPoint.Parse("127.0.0.1:5000"));
-        var t3 = Task.Run(() => RunSender(sender2, "Hello from sender 2", 600));
+        var t3 = Task.Run(() => RunSender(sender2, "Hello from sender 2", 500));
 
         await Task.WhenAll(t1, t2, t3);
     }

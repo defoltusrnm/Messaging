@@ -47,15 +47,15 @@ public class TcpMessageReciever : NetworkRecieverBase
                     var package = PackageProcessor?.Construct(rawText)
                                   ?? throw new ArgumentNullException(nameof(PackageProcessor));
 
-                    if (package == IPackage.Empty)
-                    {
-                        continue;
-                    }
-
                     var context = new NetworkContext(raw, package, Encoding, stream);
 
                     bool isHandled = await InterceptPackage(context, cancellationToken);
                     if (isHandled)
+                    {
+                        continue;
+                    }
+
+                    if (package == IPackage.Empty)
                     {
                         continue;
                     }

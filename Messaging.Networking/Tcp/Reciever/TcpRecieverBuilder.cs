@@ -1,5 +1,4 @@
-﻿using Messaging.Domain.Commands.Interfaces;
-using Messaging.Domain.Handlers.Interfaces;
+﻿using Messaging.Domain.Handlers.Interfaces;
 using Messaging.Domain.Interceptors.Interfaces;
 using Messaging.Domain.Messages.Interfaces;
 using Messaging.Domain.Packages.Interface;
@@ -14,13 +13,16 @@ public class TcpRecieverBuilder : IRecieverBuilder
     private readonly IServiceCollection _services;
     private readonly IDictionary<string, Type> _handlerTopologies;
 
-    public TcpRecieverBuilder(IServiceCollection services, IPEndPoint endPoint)
+    public TcpRecieverBuilder(IPEndPoint endPoint)
     {
+        _services = new ServiceCollection();
+        
         _handlerTopologies = new Dictionary<string, Type>();
         
-        _services = services;
-        services.AddScoped<IServiceProvider, ServiceProvider>().AddSingleton(endPoint);
+        _services.AddScoped<IServiceProvider, ServiceProvider>().AddSingleton(endPoint);
     }
+
+    public IServiceCollection Services => _services;
     
     public IMessageReciever Build()
     {

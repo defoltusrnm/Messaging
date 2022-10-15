@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Domain", "Messagi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Networking", "Messaging.Networking\Messaging.Networking.csproj", "{769B5B9E-B172-4D56-8839-63FD178EA735}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Console", "Messaging.Console\Messaging.Console.csproj", "{E81BF705-711B-4F5D-BAC9-DB7F0DC9AC79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Console", "Messaging.Console\Messaging.Console.csproj", "{E81BF705-711B-4F5D-BAC9-DB7F0DC9AC79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
