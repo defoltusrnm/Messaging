@@ -21,10 +21,10 @@ public class Program
         var buidler = new TcpRecieverBuilder(IPEndPoint.Parse("127.0.0.1:5000"));
         buidler.Services.AddScoped<ConsoleService>();
 
-        buidler.AddMessageFactory<ConsoleMessageFactory>()
+        buidler.AddMessageFactory<ConsoleMessageFactory>("log")
                .AddCommand<ConsoleHandler>("log")
-               .AddInterceptor<ConsoleInterceptor>()
                .UseHandlerMediator<HandlersMediator>()
+               .UseMessageMediator<MessageMediator>()
                .UsePackageProcessor<PackageProcessor>();
 
         var reciever = buidler.Build();

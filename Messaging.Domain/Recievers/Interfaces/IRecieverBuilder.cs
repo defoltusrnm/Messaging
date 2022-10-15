@@ -11,8 +11,9 @@ public interface IRecieverBuilder
     IServiceCollection Services { get; }
     IRecieverBuilder UsePackageProcessor<TProcessor>() where TProcessor : class, IPackageProcessor;
     IRecieverBuilder UseHandlerMediator<TMediator>() where TMediator : class, IHandlersMediator;
+    IRecieverBuilder UseMessageMediator<TMediator>() where TMediator : class, IMessageMediator;
     IRecieverBuilder AddInterceptor<TInterceptor>() where TInterceptor : class, IPackageInterceptor;
-    IRecieverBuilder AddMessageFactory<TFactory>() where TFactory : class, IMessageFactory;
+    IRecieverBuilder AddMessageFactory<TMessageFactory>(string command) where TMessageFactory : class, IMessageFactory;
     IRecieverBuilder AddCommand<TMessageHandler>(string command) where TMessageHandler : class, IMessageHandler;
     IMessageReciever Build();
 }

@@ -6,12 +6,12 @@ namespace Messaging.Networking.Tcp.Packages;
 
 public class PackageProcessor : IPackageProcessor
 {
-    public PackageProcessor(IEnumerable<IMessageFactory> messageFactories)
+    private readonly IMessageMediator _messageMediator;
+
+    public PackageProcessor(IMessageMediator messageFactory)
     {
-        MessageFactories = messageFactories;
+        _messageMediator = messageFactory;
     }
-    
-    public IEnumerable<IMessageFactory>? MessageFactories { get; }
 
     public IPackage Construct(string content)
     {
@@ -28,15 +28,7 @@ public class PackageProcessor : IPackageProcessor
             return new TcpPackage(command, IMessage.Empty);
         }
 
-        foreach (var factory in MessageFactories ?? Enumerable.Empty<IMessageFactory>())
-        {
-            if (factory.TryCreateMessage(command, commandParams, out IMessage message))
-            {
-                return new TcpPackage(command, message);
-            }
-        }
-
-        throw new InvalidOperationException($"No message topology for command {command.Path}");
+        return new TcpPackage(command, _messageMediator.CreateFactory(command).Create(commandParams));
     }
 
     public string Deconsturct(IPackage package) => $"{package.Command.Path} {package.Message.AsString()}\n";

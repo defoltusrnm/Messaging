@@ -1,14 +1,15 @@
 ﻿using Messaging.Domain.Contextes.Interfaces;
 using Messaging.Domain.Handlers.Interfaces;
+using Messaging.Domain.Topologies.Primitives;
 
 namespace Messaging.Domain.Handlers.Primitives;
 
 public class HandlersMediator : IHandlersMediator
 {
     private readonly IServiceProvider _serviceProvider;
-    private readonly IDictionary<string, Type> _handlerTopologies;
+    private readonly HandlerTopologies _handlerTopologies;
 
-    public HandlersMediator(IServiceProvider serviceProvider, IDictionary<string, Type> handlersTopology)
+    public HandlersMediator(IServiceProvider serviceProvider, HandlerTopologies handlersTopology)
     {
         _serviceProvider = serviceProvider;
         _handlerTopologies = handlersTopology;
